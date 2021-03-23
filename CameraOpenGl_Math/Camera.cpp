@@ -6,16 +6,16 @@ float Radians(float number) {
 
 Camera::Camera()
 {
-	// позиция камеры
-	// x - камера сдвигается вправо, картинка влево y - камера поднимается вверх, картинка вниз, z - чем больше, тем дальше камера
+	// ГЇГ®Г§ГЁГ¶ГЁГї ГЄГ Г¬ГҐГ°Г»
+	// x - ГЄГ Г¬ГҐГ°Г  Г±Г¤ГўГЁГЈГ ГҐГІГ±Гї ГўГЇГ°Г ГўГ®, ГЄГ Г°ГІГЁГ­ГЄГ  ГўГ«ГҐГўГ® y - ГЄГ Г¬ГҐГ°Г  ГЇГ®Г¤Г­ГЁГ¬Г ГҐГІГ±Гї ГўГўГҐГ°Гµ, ГЄГ Г°ГІГЁГ­ГЄГ  ГўГ­ГЁГ§, z - Г·ГҐГ¬ ГЎГ®Г«ГјГёГҐ, ГІГҐГ¬ Г¤Г Г«ГјГёГҐ ГЄГ Г¬ГҐГ°Г 
 	positionCamera = Vec3(0.0f, 0.0f, 3.0f);
-	// позиция цели
+	// ГЇГ®Г§ГЁГ¶ГЁГї Г¶ГҐГ«ГЁ
 	frontCamera = Vec3(0.0f, 0.0f, -1.0f);
-	// вектор вверх
+	// ГўГҐГЄГІГ®Г° ГўГўГҐГ°Гµ
 	upCamera = Vec3(0.0f, 1.0f, 0.0f);
-	// вверх - вниз
+	// ГўГўГҐГ°Гµ - ГўГ­ГЁГ§
 	pitch = 0.0f;
-	// поворот вправо - влево
+	// ГЇГ®ГўГ®Г°Г®ГІ ГўГЇГ°Г ГўГ® - ГўГ«ГҐГўГ®
 	yaw = -90.0f;
 }
 
@@ -27,31 +27,31 @@ Mat4 Camera::GetViewMatrix()
 
 Mat4 Camera::GetProjectionMatrix()
 {
-	// поле обзора, соотношение сторон, ближняя и дальняя плоскость усечения пирамиды
+	// ГЇГ®Г«ГҐ Г®ГЎГ§Г®Г°Г , Г±Г®Г®ГІГ­Г®ГёГҐГ­ГЁГҐ Г±ГІГ®Г°Г®Г­, ГЎГ«ГЁГ¦Г­ГїГї ГЁ Г¤Г Г«ГјГ­ГїГї ГЇГ«Г®Г±ГЄГ®Г±ГІГј ГіГ±ГҐГ·ГҐГ­ГЁГї ГЇГЁГ°Г Г¬ГЁГ¤Г»
 	Mat4 result;
-	return result.Perspective(45.0f, (float)800 / (float)600, 0.1f, 100.0f);
+	return result.Perspective(45.0f, 800.0f / 600.0f, 0.1f, 100.0f);
 }
 
 void Camera::ReadInput()
 {
-	// вперед, приближение к цели
+	// ГўГЇГҐГ°ГҐГ¤, ГЇГ°ГЁГЎГ«ГЁГ¦ГҐГ­ГЁГҐ ГЄ Г¶ГҐГ«ГЁ
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		positionCamera += frontCamera * speed;
 	}
-	// влево, векторное произведение дает перпендикуляр
+	// ГўГ«ГҐГўГ®, ГўГҐГЄГІГ®Г°Г­Г®ГҐ ГЇГ°Г®ГЁГ§ГўГҐГ¤ГҐГ­ГЁГҐ Г¤Г ГҐГІ ГЇГҐГ°ГЇГҐГ­Г¤ГЁГЄГіГ«ГїГ°
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		Vec3 crossResult(frontCamera.CrossProduct(upCamera));
 		positionCamera -= crossResult.Normalize() * speed;
 	}
-	// вправо
+	// ГўГЇГ°Г ГўГ®
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		Vec3 crossResult(frontCamera.CrossProduct(upCamera));
 		positionCamera += crossResult.Normalize() * speed;
 	}
-	// вниз, отдаление от цели
+	// ГўГ­ГЁГ§, Г®ГІГ¤Г Г«ГҐГ­ГЁГҐ Г®ГІ Г¶ГҐГ«ГЁ
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		positionCamera -= frontCamera * speed;
@@ -60,7 +60,7 @@ void Camera::ReadInput()
 
 void Camera::MouseInput(sf::Window& window)
 {
-	//тормоза
+	//ГІГ®Г°Г¬Г®Г§Г 
 	//sf::Vector2i center(window.getSize().x / 2, window.getSize().y / 2);
 	//sf::Mouse::setPosition(center, window);
 
@@ -70,7 +70,7 @@ void Camera::MouseInput(sf::Window& window)
 		yPos = sf::Mouse::getPosition(window).y;
 	}
 
-	// смещение с прошлого положения мыши
+	// Г±Г¬ГҐГ№ГҐГ­ГЁГҐ Г± ГЇГ°Г®ГёГ«Г®ГЈГ® ГЇГ®Г«Г®Г¦ГҐГ­ГЁГї Г¬Г»ГёГЁ
 	float xOffset = sf::Mouse::getPosition(window).x - xPos;
 	float yOffset = yPos - sf::Mouse::getPosition(window).y;
 	xPos = sf::Mouse::getPosition(window).x;
