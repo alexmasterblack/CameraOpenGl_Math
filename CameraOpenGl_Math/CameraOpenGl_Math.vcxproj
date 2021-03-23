@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraOpenGl_Math.cpp" />
     <ClCompile Include="Mat4.cpp" />
     <ClCompile Include="pch.cpp" />

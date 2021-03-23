@@ -9,12 +9,10 @@
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
-#include "pch.h"
-
 #include "stb_image.h"
 #include "shaderLoader.h"
-#include "Shader.h"
 #include "Camera.h"
+#include "Shader.h"
 
 int main() {
 	sf::ContextSettings settings;
@@ -24,7 +22,7 @@ int main() {
 	settings.minorVersion = 3;
 	settings.attributeFlags = sf::ContextSettings::Core;
 
-	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT, 32), "First Window",
+	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "First Window",
 		sf::Style::Titlebar | sf::Style::Close);
 
 	window.setMouseCursorVisible(false);
@@ -124,9 +122,6 @@ int main() {
 
 		glBindVertexArray(VAO);
 
-		//glm::mat4 model = glm::mat4(1.0f);
-		//auto view = camera.GetViewMatrix();
-		//auto prj = camera.GetProjectionMatrix();
 		Mat4 model(1.0f);
 		Mat4 view(camera.GetViewMatrix());
 		Mat4 prj(camera.GetProjectionMatrix());
